@@ -32,6 +32,22 @@ class Game {
             }];
             return phrases;
         }
-    
+    /**
+     * Randomly select a phrase for the player to guess.
+     * @return {Object} Phrase is chosen
+     */
+    getRandomPhrase() {
+        let randomPhrase = Math.floor(Math.random() * this.phrases.length);
+        return this.phrases[randomPhrase].phrase;
+    }
+    /**
+     * Starts the game and displays a randomly selected phrases from getRandomPhrase
+     */
+    startGame(){
+        let selectedPhrase = this.getRandomPhrase();
+        this.activePhrase = new Phrase(selectedPhrase);
+        this.activePhrase.addPhraseToPage();
+        document.getElementById('overlay').style.display = 'none';
+    }
     
     }
