@@ -4,7 +4,7 @@
 /* Variables */
 
 :root {
-  --color-win: #78CF82;
+  --color-win: #F7D650;
   --color-lose: #D94545;
   --color-start: #5b85b7;
   --color-neutral: #445069;
@@ -83,10 +83,17 @@ button {
   margin-top: 15px;
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 /* Title */
 
 .header {
-  color: #3a3f58;
+  color: #6777B2;
 }
 
 
@@ -101,6 +108,7 @@ button {
   color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.3);
 }
 
 .space {
@@ -111,7 +119,7 @@ button {
 
 .show {
   color: #fff;
-  background-color: #4ac0d5;
+  background-color: #FA9D26;
   font-size: 20px;
   height: 65px;
   width: 65px;
@@ -131,7 +139,7 @@ button {
 }
 
 .chosen {
-  background: #3a3f58;
+  background: #6777B2;
   border-radius: 5px;
   font-size: var(--font-size-medium);
   color: #FFFFFF;
@@ -180,7 +188,7 @@ button {
 }
 
 .start {
-  background-color: #3a3f58;
+  background-color: #7187C5;
 }
 
 .start a {
@@ -196,7 +204,7 @@ button {
 }
 
 .lose {
-  background-color: #f5785f;
+  background-color: #E45D82;
 }
 
 .lose a {

@@ -3,22 +3,21 @@
  * Game.js 
  */
 
-class Game {
-    constructor(missed = 0, phrases, activePhrase = null) {
-        this.missed = missed;
+ class Game {
+    constructor() {
+        this.missed = 0;
         this.phrases = phrases;
-        this.activePhrase = activePhrase;
+        this.activePhrase = null;
     }
 
-    /**
-     * Starts the game and displays a randomly selected phrases from getRandomPhrase
-     */
+    // Starts the game by first resetting the game and then displays a randomly selected phrases from getRandomPhrase
     startGame(){
-        //let selectedPhrase = this.getRandomPhrase();
         $('#overlay h1').remove();
-		 $('#overlay').css('display','none');
-		 $('#overlay').removeClass('win lose');
+        $('#overlay').css('display', 'none');
+        $('#overlay').removeClass('win lose');
+
         this.resetGame();
+
         this.activePhrase = new Phrase(this.getRandomPhrase());
         this.activePhrase.addPhraseToDisplay();
     }
@@ -28,85 +27,74 @@ class Game {
      * @return {Object} Phrase is chosen
      */
     getRandomPhrase() {
-        let arr = this.phrases;
-        let total = arr.length;
-        let randomPhrase = Math.floor(Math.random() * total);
-        return this.phrases[randomPhrase];
+        let phraseArray = this.phrases;
+        let randomIndex = Math.floor(Math.random() * phraseArray.length);
+        return this.phrases[randomIndex];
     }
+    
+    // Handles the log for buttons pressed or clicked
+    handleInteraction(button) {
 
-    handleInteraction(buttonClicked) {
-        // Disable selected letter on the game board
-        $(buttonClicked).addClass('chosen animated tada key');
-        $(buttonClicked).prop('disabled', true);
-
-        // Check if letter clicked is in phrase
-        let letterCheck = this.activePhrase.checkLetter(buttonClicked);
-        if (letterCheck === false) {
-            // Wrong letter removes heart
+        let letter = this.activePhrase.checkLetter(button);
+        if(letter === false){
+            $(button).addClass('wrong');
             this.removeLife();
+            $(button).prop('disabled', true);
         } else {
-            // Correct letter shows up on game board
-            this.activePhrase.showMatchedLetter(buttonClicked);
+            $(button).addClass('chosen animated pulse key');
+            $(button).prop('disabled', true);
+            this.activePhrase.showMatchedLetter(button);
         }
-        // Check to see if player won on last entry
+
         this.checkForWin();
     }
 
-    /**
-     * Remove life function, hides heart.
-     */ 
+    // When wrong letter is selected fires and hides a heart.
     removeLife() {
         this.missed += 1;
         $(`#scoreboard ol li:nth-of-type(${this.missed})`).css('display', 'none');
     }
 
-    /**
-     * Check to see if player has won game. Checks for completed phrase, also checks for remaining hearts
-     */
+    // Check to see if player has won or not. Do all chosen letters match the correct letters, and does if player still have hearts.
     checkForWin() {
-        let letterClass = $('#phrase ul li.letter').length;
-        let showClass = $('#phrase ul li.show').length;
-        if(letterClass === showClass) {
+        let classLetter = $('#phrase ul li.letter').length;
+        let classShow = $('#phrase ul li.show').length;
+        if(classLetter === classShow) {
             this.gameOver(true);
         }
         if(this.missed >= 5) {
             this.gameOver(false);
         }
     }
-
-    /**
-     * Declare if game has been won or lost.
-     */
-    gameOver(win){
+    
+    // Declare if game has been won or lost.
+    gameOver(win) {
         this.resetGame();
+        // Reload the Start Game button and display win/lose message
         if(win) {
             $('#overlay').css('display', 'flex');
             $('#overlay').addClass('win');
-            $('#overlay h2').after($('<h1>The winner is you!</h1>'))
+            $('#overlay h2').after($('<h1>You win! Want to play again?</h1>'));
         } else {
             $('#overlay').css('display', 'flex');
             $('#overlay').addClass('lose');
-            $('#overlay h2').after($('<h1>If at first you don\'t succeed...'))
+            $('#overlay h2').after($('<h1>If at first you don\'t succeed\...</h1>'));
         }
 
-        // Reload the Start Game button and display win/lose message
-        setTimeout(function() {
+        setTimeout(function () {
             $('#btn__reset').removeClass('animated tada');
             $('#btn__reset').addClass('animated tada');
-        }, 2500);
-
-        setTimeout(function() {
-            $('#overlay h1').removeClass('animated heartBeat');
-            $('#overlay h1').addClass('animated heartBeat');
-        }, 500);
+        }, 1500);
     }
 
+    // Reset the game board
     resetGame() {
         this.missed = 0;
         $('#phrase ul').empty();
-        $('#qwerty .keyrow button').removeClass('chosen animated tada key');
-        $('#qwerty .keyrow button').addClass('key');
-        $('#qwerty .keyrow button').attr('disabled', false);
-        $('#scorebaord ol li').css('display', '');
+        $('#qwerty .keyrow button').removeClass('chosen animated pulse key');
+        $('#qwerty .keyrow button').removeClass('wrong');
+		$('#qwerty .keyrow button').addClass('key');
+		$('#qwerty .keyrow button').prop('disabled',false);
+		$('#scoreboard ol li').css('display','');
     }
-}
+ }

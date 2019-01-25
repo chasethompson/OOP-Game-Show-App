@@ -3,7 +3,7 @@
  * Phrase.js
  */
 
-class Phrase {
+ class Phrase {
     constructor(phrase) {
         this.phrase = phrase.toLowerCase();
     }
@@ -12,9 +12,9 @@ class Phrase {
      * Display the phrase board on screen
      */
     addPhraseToDisplay() {
-        let arr = [...this.phrase];
+        let gameBoardPhrase = [...this.phrase];
 
-        arr.forEach(function(e){
+        gameBoardPhrase.forEach(function(e) {
             let $li;
             if(e === ' ') {
                 $li = $('<li>').addClass('space');
@@ -25,28 +25,29 @@ class Phrase {
             $('#phrase ul').append($li);
         });
     }
-    
+
     /**
      * Checks to see if selected letter is in phrase on game board.
      * @param {string} letterSelected - Letter to check for
      */
-    checkLetter(letterSelected) {
-        let isMatch = false;
-        let letter = letterSelected.textContent;
-        
+    checkLetter(selectedLetter) {
+        let isMatched = false;
+        let letter = selectedLetter.textContent;
         $('#phrase ul li.letter').each((index, value) => {
             let $value = $(value);
             if(letter === $value.text()) {
-                isMatch = true;
+                isMatched = true;
             }
         });
-        return isMatch;
+        return isMatched;
     }
 
-    showMatchedLetter(matchedLetterElement){
-        // $(matchedLetterElement).addClass('show');
-        let letter = $(matchedLetterElement).text();
-        let elementFromPhrase = $(`#phrase ul li.letter:contains('${letter}')`);
-        elementFromPhrase.addClass('show animated flash');
-      }
-}
+    /**
+     * If letter matches it is added to board with animation
+     */
+    showMatchedLetter(letterMatch) {
+        let letter = $(letterMatch).text();
+        let letterFromPhrase = $(`#phrase ul li.letter:contains('${letter}')`);
+        letterFromPhrase.addClass('show animated flash');
+    }
+ }
