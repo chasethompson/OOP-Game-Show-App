@@ -39,7 +39,11 @@ $('#qwerty').on('click', (event) => {
 $('body').on('keypress', (event) => {
     let loggedKey = event.keyCode;
     let letter = String.fromCharCode(loggedKey).toLowerCase();
-    let button = $(`button.key:contains('${letter}')`);
-    game.handleInteraction(button.get(0));
-    
-});
+    if($('#overlay').is(':hidden')) {
+        let button = $(`button.key:contains('${letter}')`);
+        game.handleInteraction(button.get(0));
+    } else if (letter === 's') {
+        game = new Game();
+        game.startGame();
+    } 
+})

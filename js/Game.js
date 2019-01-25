@@ -13,7 +13,7 @@
     // Starts the game by first resetting the game and then displays a randomly selected phrases from getRandomPhrase
     startGame(){
         $('#overlay h1').remove();
-        $('#overlay').css('display', 'none');
+        $('#overlay').hide();
         $('#overlay').removeClass('win lose');
 
         this.resetGame();
