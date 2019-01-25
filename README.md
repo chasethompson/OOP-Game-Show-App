@@ -1,5 +1,7 @@
 # OOP-Game-Show-App
 A browser-based, word guessing game: "Phrase Hunter." Game uses JavaScript and OOP (Object-Oriented Programming) to select a random, hidden phrase. A player tries to guess the phrase by selecting individual letters from an onscreen keyboard. Can they guess the phrase before they run out of attempts?
+
+Play game here - https://chasethompson.github.io/OOP-Game-Show-App/
 ### Understand the rules of the game
 - [x] The player’s goal is to guess all the letters in a hidden, random phrase. At the beginning, the player only sees the number of letters and words in the phrase, represented by blank boxes on the screen.
 - [x] The player clicks an onscreen keyboard to guess letters in the phrase.
