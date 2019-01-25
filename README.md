@@ -48,3 +48,4 @@ phrase: this is the actual phrase the Phrase object is representing. This proper
 ### Making the project your own
 - [x] The general layout should remain the same, but feel free to make the project your own by experimenting with things like color, background color, font, borders, shadows, transitions, animations, filters, etc.
 Detail your style changes in your README.md file and in your submission notes.
+    - [x]  Added new color palette to layout, animations to buttons and letters, and shadows to the phrase on game board.
